@@ -3,6 +3,7 @@ import './SignUp.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [firstName , setFirstName] = useState();
@@ -10,6 +11,7 @@ function SignUp() {
     const [username , setUsername] = useState();
     const [password , setPassword] = useState();
     
+    const navigate=useNavigate();
 
 
     const handleSubmit=async()=>{
@@ -24,6 +26,7 @@ function SignUp() {
       try{
         const response = await axios.post("http://localhost:8080/register",data).then((resp)=>{
             console.log(resp)
+            navigate('/')
         })
       }catch(error){
         console.log(error)
@@ -64,7 +67,7 @@ function SignUp() {
         </div>
         <div className="submit-container">
             <div className="submit" onClick={handleSubmit}>Sign Up</div>
-            <Link to='/login'>
+            <Link to='/'>
             <div className="login">Go To Login </div>
             </Link>
         </div>

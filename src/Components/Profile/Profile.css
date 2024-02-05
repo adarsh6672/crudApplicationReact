@@ -1,0 +1,36 @@
+.home{
+    align-items: center;
+    font-size: large;
+
+}
+
+
+.userDetails {
+    /* background: rgb(241, 241, 241); */
+    text-align: center;
+    height: 400px;
+    width: 600px;
+    
+}
+
+.details{
+    margin-top: 100px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.userimage {
+    /* background: rgb(224, 224, 224); */
+    height: 400px;
+    width: 600px;
+}
+
+
+.user-info{
+    display: flex;
+    justify-content: space-around;
+}
+
+.left-info{
+    font-weight: 700;
+}

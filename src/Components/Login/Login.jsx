@@ -23,25 +23,7 @@ function Login() {
                 localStorage.setItem('token' ,token)
                 localStorage.setItem('role',resp.data.role)
                 console.log(resp)
-                if(localStorage.getItem('role')==='USER'){
-                    await axios.get("http://localhost:8080/demo",{
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                     }
-                }).then((response)=>{
-                    console.log(response)
-                    console.log('user logged in')
-                })         
-                }else{
-                    await axios.get("http://localhost:8080/admin_dashboard",{
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                     }
-                }).then((response)=>{
-                    console.log(response)
-                    console.log('admin loggedn in')
-                })         
-                }
+                nav('/home')
                  
                 
             })
