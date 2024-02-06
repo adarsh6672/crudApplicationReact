@@ -1,15 +1,26 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Login.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {  useDispatch, useSelector } from 'react-redux';
+import { userLogin } from '../../Redux/Slice/AuthSlice';
 function Login() {
 
     const [username , setUsername] = useState();
     const [password , setPassword] = useState();
 
-    const nav=useNavigate();
+    
 
+    const dispatch= useDispatch();
+    let tester = useSelector(state=>state.auth.isLogin)
+    const nav=useNavigate();
+    useEffect(()=>{
+        if(tester){
+            nav('/home')
+        }
+    },[])
+ 
     const handleClick=async ()=>{
         const data={
             username,
@@ -17,12 +28,14 @@ function Login() {
         }
         console.log(data)
 
+       
+
         try{
              await axios.post("http://localhost:8080/login",data).then( async (resp)=>{
                 let token= resp.data.token
                 localStorage.setItem('token' ,token)
                 localStorage.setItem('role',resp.data.role)
-                console.log(resp)
+                dispatch(userLogin())
                 nav('/home')
                  
                 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Profile.css'
 import axios from 'axios'
 import Header from '../Header/Header'
+import ImageUpload from '../ImageUpload/ImageUpload';
 
 function Profile() {
 
@@ -61,7 +62,7 @@ function Profile() {
                     
                 </div>
                 <div className="userimage">
-                    
+                    <ImageUpload />
                 </div>
             </div>
         

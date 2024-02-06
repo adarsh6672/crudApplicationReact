@@ -5,12 +5,16 @@ import './AdminPanel.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash , faEdit, faSearch ,faAdd} from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 
 function AdminPanel() {
     const [users , setUsers]=useState();
     const [modify , setModify] = useState(false)
+    const navigate= useNavigate()
+    const [searchkey , setSearchKey]= useState('');
+    const [result , setResult]= useState()
 
     useEffect(()=>{
         const fethData= ()=>{
@@ -21,6 +25,7 @@ function AdminPanel() {
         }).then((responce)=>{
             console.log(responce.data)
             setUsers(responce.data)
+            setResult(responce.data)
         })
         }
     fethData();
@@ -46,6 +51,18 @@ function AdminPanel() {
     }
    }
 
+   const editItem=(item)=>{
+        navigate('/edituser',{state: item})
+   }
+
+
+   const handleSearch=()=>{
+    const filteredUser=users.filter(user =>
+        user.firstName.toLowerCase().includes(searchkey.toLowerCase())
+      );
+        setResult(filteredUser)
+   }
+
 
   return (
     <div>
@@ -55,10 +72,12 @@ function AdminPanel() {
         
         <div className="wrap">
             <div className="search">
-                <input type="text" className="searchTerm" placeholder="Search"/>
-                <div  className="searchButton">
+                <input type="text" className="searchTerm" placeholder="Search"
+                onChange={(e)=>setSearchKey(e.target.value)}/>
+                <div  className="searchButton" onClick={handleSearch}>
                     
-                    <FontAwesomeIcon icon={faSearch} /> Search
+                    <FontAwesomeIcon icon={faSearch} 
+                    /> Search
                 </div>
             </div>
             <Link to='adduser'>
@@ -81,7 +100,7 @@ function AdminPanel() {
                     </tr>
                 </thead>
                 <tbody>
-                    {users && users.filter((user)=>user.role!=='ADMIN').map((item, index)=>(
+                    {result && result.filter((user)=>user.role!=='ADMIN').map((item, index)=>(
                         <tr key={index}>
                             <td>{index+1}</td> 
                             <td>{item.firstName}</td>
@@ -89,9 +108,9 @@ function AdminPanel() {
                             <td>{item.username}</td>
                             <td>{item.role}</td>
                             <td>
-                            <FontAwesomeIcon
-                                 
-                             className='icon' icon={faEdit} />
+                            <FontAwesomeIcon   
+                             className='icon' icon={faEdit}
+                             onClick={()=>{editItem(item)}} />
                             <FontAwesomeIcon className='icon'
                                 onClick={()=>{handleDelete(item.id)}}
                              icon={faTrash} />

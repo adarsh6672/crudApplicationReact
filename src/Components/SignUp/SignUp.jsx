@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './SignUp.css'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { useSelector , useDispatch } from 'react-redux';
 
 function SignUp() {
     const [firstName , setFirstName] = useState();
@@ -12,8 +13,12 @@ function SignUp() {
     const [password , setPassword] = useState();
     
     const navigate=useNavigate();
-
-
+    const authenticated=useSelector(state=>state.auth.isLogin)
+    useEffect(()=>{
+        if(authenticated){
+            navigate('/home')
+        }
+    },[])
     const handleSubmit=async()=>{
         const data={
             firstName,

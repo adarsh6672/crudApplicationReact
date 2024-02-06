@@ -1,12 +1,19 @@
 import React from 'react'
 import './Header.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { UseSelector , useDispatch, useSelector } from 'react-redux'
+import AuthSlice, { userLogout } from '../../Redux/Slice/AuthSlice'
+
 
 
 function Header() {
+    const dispatch=useDispatch();
+    let status= useSelector(state => state.auth.isLogin)
     const navigate = useNavigate()
     const handleLogout=()=>{
         localStorage.clear()
+        dispatch(userLogout())
+        console.log(status , 'is the status of login')
         navigate('/')
         console.log(localStorage.getItem('token'),'is the token')
     }
