@@ -8,7 +8,6 @@ import { updatePicture } from '../../Redux/Slice/UserDataSlice';
 function ImageUpload() {
     const dispatch=useDispatch()
     const [file ,setFile]=useState()
-    const [image , setImage]= useState('/hello')
     const [vis ,setVis]=useState(false)
     const [upload , setUpload]=useState(false)
     const formData = new FormData();
@@ -19,6 +18,9 @@ function ImageUpload() {
     function handleForm(e) {
         e.preventDefault();
         const fileUpload=async()=>{
+            if(file!==null){
+
+            
             try{
                 await axios.post("http://localhost:8080/user/uploadimage",formData,{
                 headers:{
@@ -35,6 +37,7 @@ function ImageUpload() {
             }
             
         }
+    }
     
         fileUpload();
       }
