@@ -3,29 +3,15 @@ import './Profile.css'
 import axios from 'axios'
 import Header from '../Header/Header'
 import ImageUpload from '../ImageUpload/ImageUpload';
+import { UseSelector, useSelector } from 'react-redux';
 
 function Profile() {
 
-    const [user , setUser] = useState();
+    // const [user , setUser] = useState();
+    const user=useSelector(state => state.userData.userData)
+    
 
-    useEffect(()=>{
-
-        (()=>{
-            
-                 axios.get("http://localhost:8080/profile",{
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                 }
-            }).then((response)=>{
-                console.log(response)
-                console.log(response.data.username)
-                console.log('user logged in')
-                setUser(response.data)
-            })         
-            
-        })()
-        
-    },[])
+       
   return (
     <div>
         <Header />

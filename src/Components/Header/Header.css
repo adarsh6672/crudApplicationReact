@@ -50,4 +50,33 @@
     justify-content: flex-end;
     cursor: pointer;
   }
- 
+  .main-header{
+    display: flex;
+    align-items: center;
+  }
+  .header-left{
+    width: 85%;
+  }
+
+  .header-right{
+    width: 15%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .header-pic{
+    display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px white solid;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  }
+
+  .header-name{
+    color: white;
+    font-weight: 700;
+    font-size: large;
+  }

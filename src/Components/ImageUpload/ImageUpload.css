@@ -1,0 +1,22 @@
+.profile-pic{
+    display: inline-block;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.submit-button{
+    background:green;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 8px;
+    width: 100px;
+}
+
+.img-input{
+    border: none;
+  }
